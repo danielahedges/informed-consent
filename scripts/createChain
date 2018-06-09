@@ -1,0 +1,15 @@
+#!/bin/bash
+
+extid1=$(echo "Tk421 at your post" | BASE64)
+ts=$(date | BASE64)
+desc=$(echo "This is my empty description" | BASE64)
+data="{\"external_ids\":[\"$extid1\",\"$ts\"],\"content\":\"$desc\"}"
+echo "$data"
+
+curl --request POST \
+  --url "https://apiplus-api-sandbox-testnet.factom.com/v1/chains" \
+  --header "factom-provider-token: $FACTOM_API_KEY" \
+  --header "Content-Type: application/json" \
+  --data "$data"
+
+# {"entry_hash":"727ccfa3b61a83922a07d78e674322224d7631fc0dde3543c91278457925bf05","chain_id":"afadf90c786785d341b4f234a8c66064dc3af1c644b93ad414b20e7247f5daa5"}

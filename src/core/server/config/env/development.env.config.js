@@ -2,8 +2,9 @@ const url = process.env.APP_URL || 'http://localhost:6005';
 
 module.exports = {
   name: 'dev',
-  db: 'mongodb://localhost/monocot',
+  db: 'mongodb://localhost/infcon',
   sessionSecret: 'sprawledCounterfeitCountersignedLozenge',
+  factomApiKey: process.env.FACTOM_API_KEY,
   facebook: {
     enabled: !!process.env.FACEBOOK_OAUTH_ENABLED,
     clientID: process.env.FACEBOOK_OAUTH_CLIENTID,

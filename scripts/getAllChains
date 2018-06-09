@@ -1,0 +1,6 @@
+#!/bin/bash
+
+curl --request GET \
+  --header "factom-provider-token: $FACTOM_API_KEY" \
+  --header "Content-Type: application/json" \
+  --url https://apiplus-api-sandbox-testnet.factom.com/v1/chains

@@ -36,4 +36,14 @@ if (window.location.hash === '#_=_') {
 
 angular.element(document).ready(function() {
   angular.bootstrap(document, [mainApplicationModuleName]);
+  // $('.button-collapse').sideNav({
+  //   closeOnClick: true
+  // });
+  $('.collapsible').collapsible();
+  // $('.datepicker').pickadate({
+  //   selectMonths: true, // Creates a dropdown to control month
+  //   selectYears: 75, // Creates a dropdown of 75 years to control year
+  //   max: new Date(),  // Sets the max date to today.
+  // });
+  $('.dropdown-button').dropdown({hover: true});
 });
