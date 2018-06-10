@@ -3,9 +3,6 @@ angular.module('Core').config(['$routeProvider',
     $routeProvider.
       when('/', {
         templateUrl: '/views/home'
-      }).
-      otherwise({
-        redirectTo: '/'
       });
   }
 ]);

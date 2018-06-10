@@ -1,0 +1,13 @@
+section(data-ng-controller="AgreementController as ctrl", data-ng-init="ctrl.initList()")
+  h3 Agreement List
+  div.container
+    ul.collection.center-align(data-ng-show="!ctrl.agreements || ctrl.agreements.length>0")
+      li.collection-item.row(data-ng-repeat="agreement in ctrl.agreements")
+        a(data-ng-href="#!/agreements/edit/{{agreement._id}}") {{agreement.name}}
+    div.center-align(data-ng-hide="!ctrl.agreements || ctrl.agreements.length>0")
+      p
+        span.text-lighten-2.text-grey 'No agreements yet.'
+    div.input-field
+      a(href="#!/agreements/create")
+        button.waves-effect.waves-light.btn
+          i.material-icons add

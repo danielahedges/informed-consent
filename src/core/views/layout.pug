@@ -23,12 +23,12 @@ html
                 a.brown-text.disabled(href="/#!/") #{username}
               li
                 a(href="/signout") {{ 'NAVBAR.LOGOUT' | translate }}
-          ul.side-nav#nav-mobile
+          //- ul.side-nav#nav-mobile
+          //-   +links
+          ul.right
             +links
-          ul.right.hide-on-med-and-down
-            +links
-          a.button-collapse(data-activates="nav-mobile" href="#")
-            i.material-icons menu
+          //- a.button-collapse(data-activates="nav-mobile" href="#")
+          //-   i.material-icons menu
     main
       block content
     

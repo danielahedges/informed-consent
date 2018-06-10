@@ -1,0 +1,29 @@
+section(data-ng-controller="AgreementController as ctrl", data-ng-init="ctrl.initEdit()")
+  h3 Edit Agreement
+  div.container
+    div.input-field
+      input(id="agreement-name" name="agreement-name" type="text" data-ng-model="ctrl.agreement.name")
+      label(for="agreement-name") Name
+    ul.collection
+      li(data-ng-repeat="document in ctrl.agreement.documents")
+        div.container
+          div.row
+            div.input-field.s4
+              input(id="document-language-{{$index}}" name="document-language-{{$index}}", type="text" data-ng-model="document.language")
+              label(for="document-language-{{$index}}") Language
+            div.input-field.s4
+              input(id="document-version-{{$index}}" name="document-version-{{$index}}", type="text" data-ng-model="document.version")
+              label(for="document-version-{{$index}}") Version
+            div.input-field.s4
+              input(type="checkbox", data-ng-checked="document.obsolete")
+              span Obsolete
+          div.input-field
+            textarea.materialize-textarea(id="document-text-{{$index}}" name="document-text-{{$index}}", type="text" data-ng-model="document.text")
+            label(for="document-text-{{$index}}") Text
+      li
+        div.container
+          div.input-field
+            button.waves-effect.waves-light.btn(data-ng-click="ctrl.pushDocument()")
+              i.material-icons add
+          div.input-field
+            button.waves-effect.waves-light.btn(data-ng-click="ctrl.save()") Save

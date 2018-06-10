@@ -26,7 +26,7 @@ export class ChainService {
   static makeRequest(options, cb) {
     let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
-    xhr.addEventListener('readystatechange', function () {
+    xhr.addEventListener('readystatechange', function() {
       if (this.readyState === this.DONE) {
         cb(cleanResponse(JSON.parse(this.responseText)));
       }
@@ -54,63 +54,105 @@ export class ChainService {
     }
     return JSON.stringify(data);
   }
-  static create({external_ids, content}, cb) {
-    this.makeRequest({
-      external_ids,
-      content,
-      method: 'POST',
-      url: 'https://apiplus-api-sandbox-testnet.factom.com/v1/chains'
-    }, response => {
-      if (!response) {
-        throw new Error('No response');
-      }
-      if (response.errors && response.errors.detail) {
-        throw new Error(response.errors.detail);
-      }
-      var chain = new Chain(response);
-      Object.assign(chain, {
+  static create({ external_ids, content }, cb) {
+    this.makeRequest(
+      {
         external_ids,
-        content
-      });
-      chain.save((err, obj) => {
-        if (err || !obj) {
-          throw new Error('failed to create chain: ', JSON.stringify(chain));
+        content,
+        method: 'POST',
+        url: 'https://apiplus-api-sandbox-testnet.factom.com/v1/chains'
+      },
+      response => {
+        if (!response) {
+          throw new Error('No response');
         }
-        cb(obj);
-      });
-    });
+        if (response.errors && response.errors.detail) {
+          throw new Error(response.errors.detail);
+        }
+        var chain = new Chain(response);
+        Object.assign(chain, {
+          external_ids,
+          content
+        });
+        chain.save((err, obj) => {
+          if (err || !obj) {
+            throw new Error('failed to create chain: ', JSON.stringify(chain));
+          }
+          cb(obj);
+        });
+      }
+    );
   }
-  static search({external_ids}, cb) {
-    this.makeRequest({
-      external_ids,
-      method: 'POST',
-      url: 'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/search'
-    }, cb);
+  static search({ external_ids }, cb) {
+    this.makeRequest(
+      {
+        external_ids,
+        method: 'POST',
+        url: 'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/search'
+      },
+      cb
+    );
   }
-  static getChain({chain_id}, cb) {
-    this.makeRequest({
-      method:'GET',
-      url: 'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/'+chain_id
-    }, cb);
+  static getChain({ chain_id }, cb) {
+    this.makeRequest(
+      {
+        method: 'GET',
+        url:
+          'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/' + chain_id
+      },
+      cb
+    );
   }
-  static entries({chain_id}, cb) {
-    this.makeRequest({
-      method: 'GET',
-      url: 'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/'+chain_id+'/entries'
-    }, cb);
+  static entries({ chain_id }, cb) {
+    this.makeRequest(
+      {
+        method: 'GET',
+        url:
+          'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/' +
+          chain_id +
+          '/entries'
+      },
+      cb
+    );
   }
-  static enter({chain_id, external_ids, content}, cb) {
-    this.makeRequest({
-      external_ids,
-      content,
-      method: 'POST',
-      url: 'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/'+chain_id+'/entries'
-    }, cb);
+  static enter({ chain_id, external_ids, content }, cb) {
+    this.makeRequest(
+      {
+        external_ids,
+        content,
+        method: 'POST',
+        url:
+          'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/' +
+          chain_id +
+          '/entries'
+      },
+      cb
+    );
   }
-  static getEntry({chain_id, entry_hash}, cb) {
-    this.makeRequest({
-      method: 'GET',
-      url: 'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/'+chain_id+'/entries/'+entry_hash
-    }, cb);
+  static searchEntry({ chain_id, external_ids }, cb) {
+    this.makeRequest(
+      {
+        external_ids,
+        method: 'POST',
+        url:
+          'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/' +
+          chain_id +
+          '/entries/search'
+      },
+      cb
+    );
+  }
+  static getEntry({ chain_id, entry_hash }, cb) {
+    this.makeRequest(
+      {
+        method: 'GET',
+        url:
+          'https://apiplus-api-sandbox-testnet.factom.com/v1/chains/' +
+          chain_id +
+          '/entries/' +
+          entry_hash
+      },
+      cb
+    );
   }
 }

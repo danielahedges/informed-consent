@@ -44,7 +44,7 @@ describe('index.server.core.ctrl', () => {
     expect(mockRes.render.getCall(0).args).to.eql([
       'index',
       {
-        title: 'Hello World',
+        title: 'Informed Consent',
         username: mockReq.user.username,
         user: '{"username":"Harold T. Pants"}',
         auth: {
