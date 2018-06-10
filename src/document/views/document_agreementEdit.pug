@@ -15,7 +15,7 @@ section(data-ng-controller="AgreementController as ctrl", data-ng-init="ctrl.ini
               input(id="document-version-{{$index}}" name="document-version-{{$index}}", type="text" data-ng-model="document.version")
               label(for="document-version-{{$index}}") Version
             div.input-field.s4
-              input(type="checkbox", data-ng-checked="document.obsolete")
+              input(type="checkbox", data-ng-model="document.obsolete")
               span Obsolete
           div.input-field
             textarea.materialize-textarea(id="document-text-{{$index}}" name="document-text-{{$index}}", type="text" data-ng-model="document.text")
