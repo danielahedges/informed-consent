@@ -2,7 +2,7 @@ const url = process.env.APP_URL || 'http://localhost:6005';
 
 module.exports = {
   name: 'dev',
-  db: 'mongodb://localhost/infcon',
+  db: process.env.MONGODB_CONNECT || 'mongodb://localhost/infcon',
   sessionSecret: 'sprawledCounterfeitCountersignedLozenge',
   factomApiKey: process.env.FACTOM_API_KEY,
   facebook: {
