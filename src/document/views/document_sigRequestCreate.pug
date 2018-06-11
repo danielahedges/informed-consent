@@ -1,0 +1,12 @@
+section(data-ng-controller="SigRequestController as ctrl", data-ng-init="ctrl.initCreate()")
+  h3 Create Signature Request
+  div.container
+    div.input-field
+      input(id="user-name", name="user-name", type="text", data-ng-model="ctrl.sigRequest.username")
+      label(for="user-name") Requestee Username
+    div
+      ul
+        li(data-ng-repeat="user in ctrl.users") 
+          span(data-ng-click="ctrl.sigRequest.username = user.username") {{user.username}}
+    div.input-field(data-ng-repeat="agreement in ctrl.agreements")
+      button.waves-effect.waves-light.btn(id="agreement_{{agreement._id}}", name="agreement_{{agreement._id}}", data-ng-click="ctrl.setAgreement(agreement._id)") {{agreement.name}}

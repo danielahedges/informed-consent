@@ -8,7 +8,7 @@ export class UserRoutes {
       .route('/signup')
       .get(UserController.renderSignup)
       .post(UserController.signup);
-      
+
     app
       .route('/signin')
       .get(UserController.renderSignIn)
@@ -22,8 +22,7 @@ export class UserRoutes {
     // app.route('/password')
     //   .post(UserController.requiresLogin, UserController.changePassword);
 
-    app.route('/passwordStrength')
-      .post(UserController.checkPasswordStrength);
+    app.route('/passwordStrength').post(UserController.checkPasswordStrength);
 
     app.get('/signout', UserController.signout);
     app.get(
@@ -62,5 +61,6 @@ export class UserRoutes {
         successRedirect: '/'
       })
     );
+    app.get('/api/users', UserController.requiresLogin, UserController.list);
   }
 }

@@ -1,0 +1,22 @@
+section(data-ng-controller="SigRequestController as ctrl", data-ng-init="ctrl.initList()")
+  h3 Please Sign
+  div.container
+    ul
+      li(data-ng-repeat="sigRequest in ctrl.forMe")
+        | {{ctrl.agreementsById[sigRequest.agreement].name}}
+    div.center-align(data-ng-hide="ctrl.forMe.length>0")
+      p
+        span.text-lighten-2.text-grey No incoming requests yet.
+  h3 Your Requests
+  div.container
+    ul
+      li(data-ng-repeat="sigRequest in ctrl.fromMe") 
+        | {{ctrl.agreementsById[sigRequest.agreement].name}}
+        | for {{ctrl.usersById[sigRequest.requestee].username}}
+    div.center-align(data-ng-hide="ctrl.fromMe.length>0")
+      p
+        span.text-lighten-2.text-grey No requests yet.
+    div.input-field
+      a(href="#!/sigRequest/create")
+        button.waves-effect.waves-light.btn
+          i.material-icons add

@@ -70,8 +70,8 @@ angular.module('Document').controller('AgreementController', [
     return new AgreementController({
       $scope,
       $location,
-      AgreementService,
-      $routeParams
+      $routeParams,
+      AgreementService
     });
   }
 ]);

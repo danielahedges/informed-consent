@@ -33,7 +33,9 @@ describe('index.server.core.ctrl', () => {
   it('render index', () => {
     const mockReq = {
         user: {
-          username: 'Harold T. Pants'
+          _id: '3h48s',
+          username: 'Harold T. Pants',
+          privateStuff: 'undies'
         }
       },
       mockRes = {
@@ -46,7 +48,7 @@ describe('index.server.core.ctrl', () => {
       {
         title: 'Informed Consent',
         username: mockReq.user.username,
-        user: '{"username":"Harold T. Pants"}',
+        user: '{"_id":"3h48s","username":"Harold T. Pants"}',
         auth: {
           google: true,
           facebook: false,
