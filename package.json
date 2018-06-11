@@ -1,8 +1,8 @@
 {
-  "name": "monocot",
+  "name": "informed-consent",
   "version": "0.9.0",
-  "description": "Seed project for an ES6 MEAN site",
-  "main": "server.js",
+  "description": "Informed Consent Form Signing System",
+  "main": "build/server.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/danielahedges/monocot.git"
