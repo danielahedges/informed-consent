@@ -46,5 +46,6 @@ angular.element(document).ready(function() {
   //   selectYears: 75, // Creates a dropdown of 75 years to control year
   //   max: new Date(),  // Sets the max date to today.
   // });
-  $('.dropdown-button').dropdown({hover: true});
+  $('.dropdown-button').dropdown({ hover: true });
+  M.updateTextFields();
 });

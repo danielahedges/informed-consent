@@ -23,6 +23,10 @@ class AgreementController {
       } else {
         this.agreement = agreement;
       }
+      this.deps.$scope.$$postDigest(() => {
+        M.updateTextFields();
+        M.textareaAutoResize($('.materialize-textarea'));
+      });
     });
   }
   pushDocument() {
