@@ -3,7 +3,7 @@ class AgreementController {
     this.deps = deps;
   }
   initList() {
-    this.deps.AgreementService.list(agreements => {
+    this.deps.AgreementService.list().then(agreements => {
       this.agreements = agreements;
     });
   }
@@ -15,7 +15,7 @@ class AgreementController {
   }
   initEdit() {
     const agreementId = this.deps.$routeParams.agreementId;
-    this.deps.AgreementService.read(agreementId, (agreement, err) => {
+    this.deps.AgreementService.read(agreementId).then((agreement, err) => {
       if (err) {
         // console.log(err);
       } else if (!agreement) {
@@ -41,8 +41,7 @@ class AgreementController {
     });
   }
   create() {
-    this.deps.AgreementService.create(
-      this.agreement,
+    this.deps.AgreementService.create(this.agreement).then(
       (savedAgreeement, err) => {
         if (err) {
           // console.log(err);
@@ -54,14 +53,16 @@ class AgreementController {
     );
   }
   save() {
-    this.deps.AgreementService.save(this.agreement, (savedAgreement, err) => {
-      if (err) {
-        // console.log(err);
-      } else {
-        this.deps.$location.path('/agreements/list');
-        this.deps.$scope.$apply();
+    this.deps.AgreementService.save(this.agreement).then(
+      (savedAgreement, err) => {
+        if (err) {
+          // console.log(err);
+        } else {
+          this.deps.$location.path('/agreements/list');
+          this.deps.$scope.$apply();
+        }
       }
-    });
+    );
   }
 }
 

@@ -26,7 +26,7 @@ class SigRequestController {
   }
   loadAllAgreements() {
     this.agreementsById = {};
-    this.deps.AgreementService.list(agreements => {
+    this.deps.AgreementService.list().then(agreements => {
       this.agreements = agreements;
       this.sortById(agreements, this.agreementsById);
       angular.element('#agreement-select').formSelect();

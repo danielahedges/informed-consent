@@ -1,45 +1,23 @@
 angular.module('Document').factory('AgreementService', [
   '$http',
   $http => {
-    function list(next) {
-      $http
-        .get('/api/agreements')
-        .then(response => {
-          next(response.data);
-        })
-        .catch(() => {
-          next([]);
-        });
+    function list() {
+      return $http.get('/api/agreements').then(response => response.data);
     }
-    function create(agreement, next) {
-      $http
+    function create(agreement) {
+      return $http
         .post('/api/agreements', agreement)
-        .then(response => {
-          next(response.data);
-        })
-        .catch(err => {
-          next(null, err);
-        });
+        .then(response => response.data);
     }
-    function save(agreement, next) {
-      $http
+    function save(agreement) {
+      return $http
         .put('/api/agreements/' + agreement._id, agreement)
-        .then(response => {
-          next(response.data);
-        })
-        .catch(err => {
-          next(null, err);
-        });
+        .then(response => response.data);
     }
-    function read(agreementId, next) {
-      $http
+    function read(agreementId) {
+      return $http
         .get('/api/agreements/' + agreementId)
-        .then(response => {
-          next(response.data);
-        })
-        .catch(err => {
-          next(null, err);
-        });
+        .then(response => response.data);
     }
 
     return {
