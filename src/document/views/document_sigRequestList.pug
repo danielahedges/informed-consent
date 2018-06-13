@@ -3,7 +3,7 @@ section(data-ng-controller="SigRequestController as ctrl", data-ng-init="ctrl.in
   div.container
     ul
       li(data-ng-repeat="sigRequest in ctrl.forMe")
-        | {{ctrl.agreementsById[sigRequest.agreement].name}}
+        a(data-ng-href="#!/endorsements/create/{{sigRequest.agreement}}") {{ctrl.agreementsById[sigRequest.agreement].name}}
     div.center-align(data-ng-hide="ctrl.forMe.length>0")
       p
         span.text-lighten-2.text-grey No incoming requests yet.
