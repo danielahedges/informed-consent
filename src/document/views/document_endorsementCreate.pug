@@ -1,0 +1,9 @@
+section(data-ng-controller="EndorsementController as ctrl", data-ng-init="ctrl.initCreate()")
+  h3 New Endorsement
+  div.container
+    div.container(data-ng-repeat="version in ctrl.agreement.documents", data-ng-hide="version.obsolete")
+      label
+        input(name="version-group", type="radio", data-ng-checked="ctrl.docIndex === $index", data-ng-click="ctrl.setDocIndex($index)")
+        span Version: {{version.version}}, Language: {{version.language}}
+    div.card-panel.teal
+      span.white-text(data-ng-bind-html="ctrl.agreementText")
