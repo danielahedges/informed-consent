@@ -5,5 +5,10 @@ section(data-ng-controller="EndorsementController as ctrl", data-ng-init="ctrl.i
       label
         input(name="version-group", type="radio", data-ng-checked="ctrl.docIndex === $index", data-ng-click="ctrl.setDocIndex($index)")
         span Version: {{version.version}}, Language: {{version.language}}
+  div.container
     div.card-panel.teal
       span.white-text(data-ng-bind-html="ctrl.agreementText")
+  div.container
+    a.waves-effect.waves-light.btn
+      i.material-icons.left fingerprint
+      | Sign Here
