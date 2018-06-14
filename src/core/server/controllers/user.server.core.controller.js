@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { CONFIG } from '../config/config';
 import zxcvbn from 'zxcvbn';
+import { KeypairService } from '../../../chain/server/services/keypair.server.service';
 
 function getErrorMessage(err) {
   let message = '';
@@ -59,20 +60,27 @@ export class UserController {
     if (!req.user) {
       const user = new User(req.body);
       user.provider = 'local';
-      user
-        .save()
-        .then(() => {
-          req.login(user, err => {
-            if (err) {
-              return next(err);
-            }
-            return res.redirect('/');
-          });
+      KeypairService.saveKeyPair()
+        .then(publicKey => {
+          user.publicKey = publicKey;
+          user
+            .save()
+            .then(() => {
+              req.login(user, err => {
+                if (err) {
+                  return next(err);
+                }
+                return res.redirect('/');
+              });
+            })
+            .catch(err => {
+              const message = getErrorMessage(err);
+              req.flash('error', message);
+              return res.redirect('/signup');
+            });
         })
-        .catch(err => {
-          const message = getErrorMessage(err);
-          req.flash('error', message);
-          return res.redirect('/signup');
+        .catch(() => {
+          next(new Error('failed to generate key pair'));
         });
     } else {
       return res.redirect('/');

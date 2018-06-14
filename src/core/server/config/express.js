@@ -11,7 +11,9 @@ import { UserRoutes } from '../routes/user.server.core.routes';
 import { PartialsRoutes } from '../routes/partials.server.core.routes';
 import { AgreementRoutes } from '../../../document/server/routes/agreement.server.routes';
 import { SigRequestRoutes } from '../../../document/server/routes/sigRequest.server.routes';
+import { KeypairRoutes } from '../../../chain/server/routes/keypair.server.routes';
 import { moduleList } from '../../../modules';
+import { ChainModule } from '../../../chain/server';
 import { CONFIG } from './config';
 import _ from 'lodash';
 
@@ -55,6 +57,9 @@ export function init() {
   PartialsRoutes.init(app);
   AgreementRoutes.init(app);
   SigRequestRoutes.init(app);
+  KeypairRoutes.init(app);
+
+  ChainModule.init();
 
   return app;
 }

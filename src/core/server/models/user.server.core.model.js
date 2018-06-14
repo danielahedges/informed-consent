@@ -16,6 +16,9 @@ const UserSchema = new Schema({
   salt: {
     type: String
   },
+  publicKey: {
+    type: String
+  },
   provider: {
     type: String,
     required: 'Provider is required'
