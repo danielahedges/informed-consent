@@ -1,1 +1,1 @@
-export const moduleList = ['core', 'chains', 'document'];
+export const moduleList = ['core', 'chain', 'document'];

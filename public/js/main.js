@@ -6,7 +6,8 @@ var mainApplicationModule = angular.module(mainApplicationModuleName, [
   'pascalprecht.translate',
   'ngSanitize',
   'Core',
-  'Document'
+  'Document',
+  'Chain'
 ]);
 
 // Configure this site to use hashbang navigation, for SEO of links inside the
