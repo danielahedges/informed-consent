@@ -24,7 +24,7 @@ mainApplicationModule.config([
   '$translateProvider',
   function($translateProvider) {
     $translateProvider
-      .translations('us', english)
+      .translations('us', english) // eslint-disable-line no-undef
       .useSanitizeValueStrategy('sanitizeParameters')
       .preferredLanguage('us');
   }
@@ -41,6 +41,10 @@ angular.element(document).ready(function() {
   // $('.button-collapse').sideNav({
   //   closeOnClick: true
   // });
+  var elems = document.querySelectorAll('.sidenav');
+  M.Sidenav.init(elems, {
+    closeOnClick: true
+  });
   $('.collapsible').collapsible();
   // $('.datepicker').pickadate({
   //   selectMonths: true, // Creates a dropdown to control month
