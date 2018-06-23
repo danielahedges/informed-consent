@@ -21,15 +21,20 @@ class EndorsementController {
   refreshSignature() {
     this.deps.$scope.$$postDigest(() => {
       M.updateTextFields();
-      M.textareaAutoResize($('.materialize-textarea'));
+      // M.textareaAutoResize($('.materialize-textarea'));
     });
   }
-  getSignature(payloadObj, privateKeyString) {
+  getPayload() {
+    return JSON.stringify({
+      text: this.signature.agreementText,
+      date: this.signature.date
+    });
+  }
+  getSignature(payload, privateKeyString) {
     var oHeader = {
       alg: 'RS256'
     };
     var sHeader = JSON.stringify(oHeader);
-    var payload = JSON.stringify(payloadObj);
     // eslint-disable-next-line no-undef
     var privateKey = KEYUTIL.getKey(privateKeyString);
     // eslint-disable-next-line no-undef
@@ -42,20 +47,28 @@ class EndorsementController {
       bytesText: '...'
     };
     this.deps.KeypairService.getPrivateKey().then(key => {
-      this.signature.bytesText = key.private;
+      this.signature.payload = this.getPayload();
       this.signature.bytesText = this.getSignature(
-        {
-          text: this.signature.agreementText,
-          date: this.signature.date
-        },
+        this.signature.payload,
         key.private
       );
       this.refreshSignature();
     });
   }
   submit() {
-    // eslint-disable-next-line no-console
-    console.log('submitting!');
+    this.deps.EndorsementService.create({
+      agreement: this.deps.$routeParams.agreementId,
+      version: this.agreement.documents[this.docIndex].version,
+      language: this.agreement.documents[this.docIndex].language,
+      payload: this.signature.payload,
+      signature: this.signature.bytesText,
+      date: this.signature.date
+    }).then(() => {
+      this.deps.$scope.$$postDigest(() => {
+        this.deps.$location.path('/sigRequest/list');
+        this.deps.$scope.$apply();
+      });
+    });
   }
 }
 
@@ -66,13 +79,15 @@ angular.module('Document').controller('EndorsementController', [
   'AgreementService',
   'DocumentService',
   'KeypairService',
+  'EndorsementService',
   function(
     $scope,
     $location,
     $routeParams,
     AgreementService,
     DocumentService,
-    KeypairService
+    KeypairService,
+    EndorsementService
   ) {
     return new EndorsementController({
       $scope,
@@ -80,7 +95,8 @@ angular.module('Document').controller('EndorsementController', [
       $routeParams,
       AgreementService,
       DocumentService,
-      KeypairService
+      KeypairService,
+      EndorsementService
     });
   }
 ]);
