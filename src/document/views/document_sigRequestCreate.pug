@@ -7,6 +7,6 @@ section(data-ng-controller="SigRequestController as ctrl", data-ng-init="ctrl.in
     div
       ul
         li(data-ng-repeat="user in ctrl.users") 
-          span(data-ng-click="ctrl.sigRequest.username = user.username") {{user.username}}
+          span(data-ng-click="ctrl.setUser(user.username)") {{user.username}}
     div.input-field(data-ng-repeat="agreement in ctrl.agreements")
-      button.waves-effect.waves-light.btn(id="agreement_{{agreement._id}}", name="agreement_{{agreement._id}}", data-ng-click="ctrl.setAgreement(agreement._id)") {{agreement.name}}
+      button.waves-effect.waves-light.btn(id="agreement_{{agreement._id}}", name="agreement_{{agreement._id}}", data-ng-class="{disabled: !ctrl.sigRequest.username}", data-ng-click="ctrl.setAgreement(agreement._id)") {{agreement.name}}

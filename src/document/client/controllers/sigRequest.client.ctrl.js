@@ -110,6 +110,12 @@ class SigRequestController {
     };
     this.create();
   }
+  setUser(username) {
+    this.sigRequest.username = username;
+    this.deps.$scope.$$postDigest(() => {
+      M.updateTextFields();
+    });
+  }
   del(sigRequestId) {
     this.deps.SigRequestService.del(sigRequestId, (deletedSigRequest, err) => {
       if (!err) {
