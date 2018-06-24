@@ -8,14 +8,14 @@ export class EndorsementController {
     Endorsement = mongoose.model('Endorsement');
     Agreement = mongoose.model('Agreement');
   }
-  static getAllAgreementsById(ids) {
+  static getAllAgreementsById(ids, agreementMask) {
     var query = {};
     if (ids) {
       query._id = {
         $in: ids
       };
     }
-    return Agreement.find(query)
+    return Agreement.find(query, agreementMask)
       .exec()
       .then(agreements => {
         var agreementsById = {};
@@ -25,9 +25,10 @@ export class EndorsementController {
         return agreementsById;
       });
   }
-  static replaceAgreementIds(endorsements) {
+  static replaceAgreementIds(endorsements, agreementMask) {
     return EndorsementController.getAllAgreementsById(
-      _.map(endorsements, endorsement => endorsement.agreement)
+      _.map(endorsements, endorsement => endorsement.agreement),
+      agreementMask
     ).then(agreements => {
       var agreementsById = {};
       _.each(agreements, agreement => {
@@ -46,12 +47,15 @@ export class EndorsementController {
         signor: req.user._id
       },
       {
-        agreement: true
+        agreement: true,
+        date: true
       }
     )
       .exec()
       .then(endorsements => {
-        return EndorsementController.replaceAgreementIds(endorsements)
+        return EndorsementController.replaceAgreementIds(endorsements, {
+          name: true
+        })
           .then(returnEndorsements => {
             return res.json(returnEndorsements);
           })

@@ -12,6 +12,17 @@ class EndorsementController {
       this.setDocIndex(0);
     });
   }
+  initList() {
+    this.deps.EndorsementService.list().then(endorsements => {
+      this.endorsements = endorsements;
+    });
+  }
+  initView() {
+    const endorsementId = this.deps.$routeParams.endorsementId;
+    this.deps.EndorsementService.read(endorsementId).then(endorsement => {
+      this.endorsement = endorsement;
+    });
+  }
   setDocIndex(index) {
     this.docIndex = index;
     this.agreementText = this.deps.DocumentService.getTextAsHtml(

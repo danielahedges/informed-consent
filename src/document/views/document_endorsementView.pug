@@ -1,0 +1,28 @@
+section(data-ng-controller="EndorsementController as ctrl", data-ng-init="ctrl.initView()")
+  h3 Endorsement
+  table(data-ng-show="ctrl.endorsement")
+    tbody
+      tr
+        th Agreement
+        td(data-ng-bind="ctrl.endorsement.agreement.name")
+      tr
+        th Language
+        td(data-ng-bind="ctrl.endorsement.language")
+      tr
+        th Version
+        td(data-ng-bind="ctrl.endorsement.version")
+      tr
+        th Date
+        td(data-ng-bind="ctrl.endorsement.date")
+      tr
+        th Payload
+        td
+          div.input-field
+            i.material-icons.prefix event_note
+            input.truncate#payload-bytes(type="text", disabled, data-ng-model="ctrl.endorsement.payload")
+      tr
+        th Signature
+        td
+          div.input-field
+            i.material-icons.prefix fingerprint
+            input.truncate#signature-bytes(type="text", disabled, data-ng-model="ctrl.endorsement.signature")

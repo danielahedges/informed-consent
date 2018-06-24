@@ -1,0 +1,11 @@
+section(data-ng-controller="EndorsementController as ctrl", data-ng-init="ctrl.initList()")
+  h3 Endorsement List
+  div.container
+    ul.collection(data-ng-show="!ctrl.endorsements || ctrl.endorsements.length > 0")
+      li.collection-item.row(data-ng-repeat="endorsement in ctrl.endorsements")
+        a(data-ng-href="#!/endorsements/view/{{endorsement._id}}", data-ng-bind="endorsement.agreement.name")
+        br
+        span(data-ng-bind="endorsement.date")
+    div.center-align(data-ng-hide="!ctrl.endorsements || ctrl.endorsements.length > 0")
+      p
+        span.text-lighten-2.text-grey No endorsements yet.
